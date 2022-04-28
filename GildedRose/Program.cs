@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using GildedRose.Model;
+using GildedRose.Solution.Business;
 
 namespace GildedRose.Original
 {
@@ -9,47 +11,27 @@ namespace GildedRose.Original
         {
             Console.WriteLine("OMGHAI!");
 
-            IList<Item> Items = new List<Item>{
-                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                new Item {Name = "Sulfuras", SellIn = 0, Quality = 80},
-                new Item {Name = "Sulfuras", SellIn = -1, Quality = 80},
-                new Item
-                {
-                    Name = "Backstage passes",
-                    SellIn = 15,
-                    Quality = 20
-                },
-                new Item
-                {
-                    Name = "Backstage passes",
-                    SellIn = 10,
-                    Quality = 49
-                },
-                new Item
-                {
-                    Name = "Backstage passes",
-                    SellIn = 5,
-                    Quality = 49
-                },
-				// this conjured item does not work properly yet
-				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+            IEnumerable<Rose> Items = new List<Rose>{
+                new Rose {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+                new AgedBrie(2, 0),
+                new Rose {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+                new Sulfutras (0, 80),
+                new Sulfutras (-1, 80),
+                new BackstagePasses(15, 20),
+                new BackstagePasses(10, 49),
+                new BackstagePasses(5, 49),
+				new Conjured(3, 6)
             };
 
-            var app = new GildedRose(Items);
-
+            QualityUpdater qualityUpdater =  new QualityUpdater(Items);
 
             for (var i = 0; i < 31; i++)
             {
                 Console.WriteLine("-------- day " + i + " --------");
                 Console.WriteLine("name, sellIn, quality");
-                for (var j = 0; j < Items.Count; j++)
-                {
-                    System.Console.WriteLine(Items[j]);
-                }
+                qualityUpdater.Print();
                 Console.WriteLine("");
-                app.UpdateQuality();
+                qualityUpdater.UpdateQuality();
             }
         }
     }

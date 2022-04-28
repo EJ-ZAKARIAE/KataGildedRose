@@ -8,7 +8,7 @@ namespace GildedRose.Original
     {
         private static String AGED_BRIE_NAME = "Aged Brie";
         private static String BACKSTAGE_PASSES_NAME = "Backstage passes";
-        private static String Conjured_NAME = "Conjured Mana Cake";
+        private static String Conjured_NAME = "Conjured";
         private static String SULFURAS_NAME = "Sulfuras";
 
         IList<Item> Items;
